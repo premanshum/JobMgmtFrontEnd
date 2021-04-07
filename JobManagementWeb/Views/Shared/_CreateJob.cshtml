@@ -1,0 +1,39 @@
+﻿@model JobManagementWeb.Infrastructure.Models.JobVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row">
+    <div class="">
+        <form  id="createJob_Form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control createJob" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPhone" class="control-label"></label>
+                <input asp-for="CustomerPhone" class="form-control createJob" />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceType" class="control-label"></label>
+                <input asp-for="ServiceType" class="form-control createJob" />
+                <span asp-validation-for="ServiceType" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="BtnCreateJob" name="BtnCreateJob" />
+            </div>*@
+        </form>
+        <div class="form-group">
+            <input id="btnCreateJob" value="Create" class="btn btn-primary" type="button" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

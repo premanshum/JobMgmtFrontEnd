@@ -1,0 +1,34 @@
+﻿@model List<JobManagementWeb.Infrastructure.Models.JobVM>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Jobs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.JobId
+                </td>
+                <td>
+                    @item.CustomerName
+                </td>
+                <td>
+                    @item.CustomerPhone
+                </td>
+                <td>
+                    @item.ServiceType
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,16 @@
+﻿@model JobManagementWeb.Infrastructure.Models.SearchJobVM
+
+<div class="row">
+    <div class="">
+        <form id="SearchForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="SearchString" class="form-control" />
+                <span asp-validation-for="SearchString" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Search" class="btn btn-primary" id="btnSearchJob" />
+            </div>
+        </form>
+    </div>
+</div>

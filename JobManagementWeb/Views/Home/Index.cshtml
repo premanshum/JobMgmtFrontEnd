@@ -1,0 +1,116 @@
+﻿@model JobManagementWeb.Infrastructure.Models.HomePageVM
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="row">
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px">
+            <div class="card-header"><h1>Search Job</h1></div>
+            <div class="card-body">
+                <partial name="_SearchJob" model="Model.Search" />
+            </div>
+            <div id="searchResponse"></div>
+        </div>
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divCreateJob">
+            <div class="card-header"><h1>Create Job</h1></div>
+            <div class="card-body">
+                <partial name="_CreateJob" model="Model.Job" />
+                <div id="response"></div>
+            </div>
+        </div>
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divJobDetails">
+            <div class="card-header"><h1>Job Details</h1></div>
+            <div class="card-body">
+                <partial name="_JobDetails" model="Model.Job" />
+            </div>
+        </div>
+    </div>
+
+<div>
+    <button type="button" class="btn btn-primary" id="btnCreateNewJob" name="btnCreateNewJob">Create New Job</button>
+</div>
+
+<div>
+    <partial name="_JobList" model="Model.Jobs" />
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        var createJobDisplayFlag = true;
+        $("#divCreateJob").css("display", "none");
+        $("#divJobDetails").css("display", "none");
+        $(".createJob").val("");
+        $(".jobDetails").text("");
+
+
+        $('#btnCreateJob').click(function () {
+            $(".createJob").val("");
+            $.ajax({
+                url: "/home/create",
+                method: "POST",
+                data: $('#createJob_Form').serialize(),
+                beforeSend: function () {
+                    $('#response').html('<span class="text-info">Loading response...</span>');
+                },
+                success: function (data) {
+                    $('form').trigger("reset");
+                    $('#response').fadeIn().html(data);
+                    setTimeout(function () {
+                        $('#response').fadeOut("slow");
+                    }, 5000);
+                    $(".createJob").val("");
+                }
+            });
+        });
+
+
+        $('#btnSearchJob').click(function () {
+            $.ajax({
+                url: "/home/Search",
+                method: "POST",
+                data: $('#SearchForm').serialize(),
+                beforeSend: function () {
+                    $('#searchResponse').html('<span class="text-info">Loading response...</span>');
+                },
+                success: function (data) {
+                    $('form').trigger("reset");
+                    if (data != null) {
+                        console.log("Data:", data);
+                        $("#divJobDetails").css("display", "block");
+                        $('#searchResponse').fadeIn().html("Data found");
+                        $('#spanJobId').text(data.jobId);
+                        $('#spanCustomerName').text(data.customerName);
+                        $('#spanCustomerPhone').text(data.customerPhone);
+                        $('#spanServiceType').text(data.serviceType);
+                    }
+                    else {
+                        $(".createJob").val("");
+                        $(".jobDetails").text("");
+                        $("#divJobDetails").css("display", "none");
+                        $('#searchResponse').fadeIn().html("No data found");
+                    }
+                    setTimeout(function () {
+                        $('#searchResponse').fadeOut("slow");
+                    }, 10000);
+                }
+            });
+        });
+
+        $('#btnCreateNewJob').click(function () {
+            $(".createJob").val("");
+            if (createJobDisplayFlag == true) {
+                $("#divCreateJob").css("display", "block");
+            }
+            else {
+                $("#divCreateJob").css("display", "none");
+            }
+            createJobDisplayFlag = !createJobDisplayFlag;
+        });
+
+    });
+
+</script>
