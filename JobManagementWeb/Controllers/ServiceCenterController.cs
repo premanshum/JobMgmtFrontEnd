@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using JobManagementWeb.Infrastructure.Interfaces.Services;
 using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobManagementWeb.Controllers
 {
-    public class JobController : BaseController
+	public class ServiceCenterController : BaseController
 	{
-		private readonly ILogger<JobController> _logger;
+		private readonly ILogger<HomeController> _logger;
+		private readonly ISessionValues _sessionValues;
 		JobVM _jobVM;
+		ServiceCenterVM _serviceCenterVM;
+
+		public ServiceCenterController(
+			ILogger<HomeController> logger,
+			ISessionValues sessionValues)
+		{
+			_logger = logger;
+			_sessionValues = sessionValues;
+
+		}
 
 		public IActionResult Index()
         {
-            return View();
+			_serviceCenterVM = new ServiceCenterVM();
+            return View(_serviceCenterVM);
         }
 
 

@@ -1,69 +1,53 @@
-﻿using JobManagementWeb.Infrastructure.Models;
+﻿using JobManagementWeb.Infrastructure;
+using JobManagementWeb.Infrastructure.Interfaces.Services;
+using JobManagementWeb.Infrastructure.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace JobManagementWeb.Controllers
 {
 	public class HomeController : BaseController
 	{
 		private readonly ILogger<HomeController> _logger;
+        private readonly ISessionValues _sessionValues;
+        JobVM _jobVM;
 
-		JobVM _jobVM;
-
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(
+            ILogger<HomeController> logger,
+            ISessionValues sessionValues)
 		{
 			_logger = logger;
-		}
+            _sessionValues = sessionValues;
 
-		[HttpGet]
+        }
+
+		[ActionName("Index")]
 		public IActionResult Index()
 		{
-			HomePageVM homePageVM = new HomePageVM
-			{
-				//Jobs = GetJobs()
-			};
-
-			if(ViewBag.Job != null)
-			{
-				homePageVM.Jobs.Add(ViewBag.Job);
-			}
-
-			//homePageVM.Job = GetJobs().FirstOrDefault();
-
-			return View("Index", homePageVM);
+			return View();
 		}
 
-		[HttpPost]
-		public string Create(JobVM jobVM)
-		{
-			_jobVM = new JobVM
-			{
-				CustomerName = jobVM.CustomerName,
-				CustomerPhone = jobVM.CustomerPhone,
-				ServiceType = jobVM.ServiceType
-			};
-			ViewBag.Job = _jobVM;
-			return "All is well";
-		}
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <param name="objUser"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Index(UserProfile objUser)
+        {
+            var modelData = objUser != null ? "true" : "false";
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.Clear();
+                _sessionValues.UserId = objUser.UserName.ToString();
+                return RedirectToAction("Index", "ServiceCenter");
+            }
+            return View(objUser);
+        }
 
-		[HttpPost]
-		public JobVM Search(string searchString)
-		{
-			JobVM jobVM = null;
-			if (searchString == null)
-			{
-				return jobVM;
-			}
-
-			//jobVM = GetJobs().FirstOrDefault(x => x.CustomerPhone.Contains(searchString) || x.CustomerName.ToLower().Contains(searchString.ToLower())); ;
-
-			return jobVM;
-		}
-
-		public IActionResult Privacy()
+        public IActionResult Privacy()
 		{
 			return View();
 		}

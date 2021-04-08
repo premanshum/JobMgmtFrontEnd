@@ -1,116 +1,43 @@
-﻿@model JobManagementWeb.Infrastructure.Models.HomePageVM
-
-
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    Layout = "";
 }
-
-    <div class="row">
-        <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px">
-            <div class="card-header"><h1>Search Job</h1></div>
-            <div class="card-body">
-                <partial name="_SearchJob" model="Model.Search" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobManagementWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="page-header" id="banner">
+                    <div class="row">
+                        <div>
+                            <h1>ACME Broadband &amp; Cable TV</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="searchResponse"></div>
+            <form class="form-inline my-2 my-lg-0" asp-action="index">
+                @model JobManagementWeb.Infrastructure.Models.UserProfile
+                <input class="form-control form-control-sm" type="text" placeholder="User Id" asp-for="UserName">
+                <input class="form-control form-control-sm" type="text" placeholder="Password" asp-for="Password">
+                <button class="btn btn-primary btn-sm my-2" type="submit">Login</button>
+            </form>
+        </nav>
+    </header>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - JobManagementWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divCreateJob">
-            <div class="card-header"><h1>Create Job</h1></div>
-            <div class="card-body">
-                <partial name="_CreateJob" model="Model.Job" />
-                <div id="response"></div>
-            </div>
-        </div>
-        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divJobDetails">
-            <div class="card-header"><h1>Job Details</h1></div>
-            <div class="card-body">
-                <partial name="_JobDetails" model="Model.Job" />
-            </div>
-        </div>
-    </div>
-
-<div>
-    <button type="button" class="btn btn-primary" id="btnCreateNewJob" name="btnCreateNewJob">Create New Job</button>
-</div>
-
-<div>
-    <partial name="_JobList" model="Model.Jobs" />
-</div>
-
-
-<script>
-
-    $(document).ready(function () {
-        var createJobDisplayFlag = true;
-        $("#divCreateJob").css("display", "none");
-        $("#divJobDetails").css("display", "none");
-        $(".createJob").val("");
-        $(".jobDetails").text("");
-
-
-        $('#btnCreateJob').click(function () {
-            $(".createJob").val("");
-            $.ajax({
-                url: "/home/create",
-                method: "POST",
-                data: $('#createJob_Form').serialize(),
-                beforeSend: function () {
-                    $('#response').html('<span class="text-info">Loading response...</span>');
-                },
-                success: function (data) {
-                    $('form').trigger("reset");
-                    $('#response').fadeIn().html(data);
-                    setTimeout(function () {
-                        $('#response').fadeOut("slow");
-                    }, 5000);
-                    $(".createJob").val("");
-                }
-            });
-        });
-
-
-        $('#btnSearchJob').click(function () {
-            $.ajax({
-                url: "/home/Search",
-                method: "POST",
-                data: $('#SearchForm').serialize(),
-                beforeSend: function () {
-                    $('#searchResponse').html('<span class="text-info">Loading response...</span>');
-                },
-                success: function (data) {
-                    $('form').trigger("reset");
-                    if (data != null) {
-                        console.log("Data:", data);
-                        $("#divJobDetails").css("display", "block");
-                        $('#searchResponse').fadeIn().html("Data found");
-                        $('#spanJobId').text(data.jobId);
-                        $('#spanCustomerName').text(data.customerName);
-                        $('#spanCustomerPhone').text(data.customerPhone);
-                        $('#spanServiceType').text(data.serviceType);
-                    }
-                    else {
-                        $(".createJob").val("");
-                        $(".jobDetails").text("");
-                        $("#divJobDetails").css("display", "none");
-                        $('#searchResponse').fadeIn().html("No data found");
-                    }
-                    setTimeout(function () {
-                        $('#searchResponse').fadeOut("slow");
-                    }, 10000);
-                }
-            });
-        });
-
-        $('#btnCreateNewJob').click(function () {
-            $(".createJob").val("");
-            if (createJobDisplayFlag == true) {
-                $("#divCreateJob").css("display", "block");
-            }
-            else {
-                $("#divCreateJob").css("display", "none");
-            }
-            createJobDisplayFlag = !createJobDisplayFlag;
-        });
-
-    });
-
-</script>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

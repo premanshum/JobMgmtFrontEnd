@@ -1,0 +1,68 @@
+﻿@model JobManagementWeb.Infrastructure.Models.ServiceCenterVM
+
+<div>
+    <div class="row">
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px">
+            <div class="card-header"><h1>Search Job</h1></div>
+            <div class="card-body">
+                <partial name="_SearchJob" model="Model.Search" />
+            </div>
+            <div id="searchResponse"></div>
+        </div>
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px" id="divCreateJob">
+            <div class="card-header"><h1>Create Job</h1></div>
+            <div class="card-body">
+                <partial name="_CreateJob" model="Model.Job" />
+                <div id="response"></div>
+            </div>
+        </div>
+        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divJobDetails">
+            <div class="card-header"><h1>Job Details</h1></div>
+            <div class="card-body">
+                <partial name="_JobDetails" model="Model.Job" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="button"
+                class="btn btn-primary"
+                id="btnCreateNewJob"
+                name="btnCreateNewJob">
+            Create New Job
+        </button>
+    </div>
+</div>
+
+
+<script src="~/scripts/JobManagement.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var createJobDisplayFlag = true;
+        $("#divCreateJob").css("display", "none");
+        $("#divJobDetails").css("display", "none");
+        $(".createJob").val("");
+        $(".jobDetails").text("");
+
+
+        $('#btnCreateJob').click(OnCreateJobClick);
+
+
+        $('#btnSearchJob').click(OnSearchJobClick);
+
+        $('#btnCreateNewJob').click(function () {
+            $(".createJob").val("");
+            if (createJobDisplayFlag == true) {
+                $("#divCreateJob").css("display", "block");
+            }
+            else {
+                $("#divCreateJob").css("display", "none");
+            }
+            createJobDisplayFlag = !createJobDisplayFlag;
+        });
+
+    });
+
+</script>
