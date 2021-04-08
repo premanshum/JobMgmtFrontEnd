@@ -2,7 +2,7 @@
 var OnCreateJobClick = function () {
     $(".createJob").val("");
     $.ajax({
-        url: "/job/create",
+        url: "/ServiceCenter/create",
         method: "POST",
         data: $('#createJob_Form').serialize(),
         beforeSend: function () {
@@ -21,7 +21,7 @@ var OnCreateJobClick = function () {
 
 var OnSearchJobClick = function () {
     $.ajax({
-        url: "/job/Search",
+        url: "/ServiceCenter/Search",
         method: "POST",
         data: $('#SearchForm').serialize(),
         beforeSend: function () {
@@ -29,7 +29,7 @@ var OnSearchJobClick = function () {
         },
         success: function (data) {
             $('form').trigger("reset");
-            if (data !== null) {
+            if (data !== null && data !== undefined) {
                 console.log("Data:", data);
                 $("#divJobDetails").css("display", "block");
                 $('#searchResponse').fadeIn().html("Data found");

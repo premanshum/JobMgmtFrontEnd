@@ -35,20 +35,18 @@
 </div>
 
 
-<script src="~/scripts/JobManagement.js"></script>
+<script src="~/js/JobManagement.js"></script>
 
 <script>
 
-    $(document).ready(function () {
+    $(document).ready(function () { 
         var createJobDisplayFlag = true;
         $("#divCreateJob").css("display", "none");
         $("#divJobDetails").css("display", "none");
         $(".createJob").val("");
         $(".jobDetails").text("");
 
-
         $('#btnCreateJob').click(OnCreateJobClick);
-
 
         $('#btnSearchJob').click(OnSearchJobClick);
 
