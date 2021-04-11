@@ -1,5 +1,4 @@
-﻿using JobManagementWeb.Infrastructure;
-using JobManagementWeb.Infrastructure.Interfaces.Services;
+﻿using JobManagementWeb.Infrastructure.Interfaces.Services;
 using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using System.Diagnostics;
 
 namespace JobManagementWeb.Controllers
 {
-	public class HomeController : BaseController
+    public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
         private readonly ISessionValues _sessionValues;
@@ -25,8 +24,9 @@ namespace JobManagementWeb.Controllers
 
 		[ActionName("Index")]
 		public IActionResult Index()
-		{
-			return View();
+        {
+            HttpContext.Session.Clear();
+            return View();
 		}
 
         /// <summary>
@@ -42,6 +42,10 @@ namespace JobManagementWeb.Controllers
             {
                 HttpContext.Session.Clear();
                 _sessionValues.UserId = objUser.UserName.ToString();
+                if (objUser.UserName.ToLower().Equals("ad"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
                 return RedirectToAction("Index", "ServiceCenter");
             }
             return View(objUser);

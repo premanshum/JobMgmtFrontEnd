@@ -30,6 +30,7 @@ var OnSearchJobClick = function () {
         success: function (data) {
             $('form').trigger("reset");
             if (data !== null && data !== undefined) {
+                var jobStatusesList = '';
                 console.log("Data:", data);
                 $("#divJobDetails").css("display", "block");
                 $('#searchResponse').fadeIn().html("Data found");
@@ -37,6 +38,14 @@ var OnSearchJobClick = function () {
                 $('#spanCustomerName').text(data.customerName);
                 $('#spanCustomerPhone').text(data.customerPhone);
                 $('#spanServiceType').text(data.serviceType);
+                $('#spanAssignedTo').text(data.assignedTo.name);
+                if (data.jobStatuses !== null && data.jobStatuses !== undefined) {
+                    data.jobStatuses.forEach(item => {
+                        jobStatusesList += item.statusDescription + " on " + item.timeStamp + "<br>";
+                    });
+                }
+                console.log(jobStatusesList);
+                $('#spanStatus').html(jobStatusesList);
             }
             else {
                 $(".createJob").val("");

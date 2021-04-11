@@ -2,7 +2,7 @@
 
 namespace JobManagementWeb.Controllers
 {
-    public class LoginController : Controller
+    public class AdminController : BaseController
     {
         public IActionResult Index()
         {

@@ -1,12 +1,16 @@
-﻿using JobManagementWeb.Infrastructure.Interfaces.Services;
+﻿using JobManagementWeb.Common;
+using JobManagementWeb.Infrastructure.Interfaces.Services;
 using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace JobManagementWeb.Controllers
 {
+
 	public class ServiceCenterController : BaseController
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -23,6 +27,7 @@ namespace JobManagementWeb.Controllers
 
 		}
 
+		
 		public IActionResult Index()
         {
 			_serviceCenterVM = new ServiceCenterVM();
@@ -57,48 +62,5 @@ namespace JobManagementWeb.Controllers
 			return jobVM;
 		}
 
-		private List<JobVM> GetJobs()
-		{
-			List<JobVM> jobs = new List<JobVM>
-			{
-				new JobVM
-				{
-					CustomerName = "Yudhi",
-					CustomerPhone = "8908903245",
-					JobId = "jbasd2313",
-					ServiceType = "New"
-				},
-				new JobVM
-				{
-					CustomerName = "Bheem",
-					CustomerPhone = "8908903246",
-					JobId = "jbsdftrr343",
-					ServiceType = "Service"
-				},
-				new JobVM
-				{
-					CustomerName = "Arjun",
-					CustomerPhone = "8908903247",
-					JobId = "jb43rtert",
-					ServiceType = "Service"
-				},
-				new JobVM
-				{
-					CustomerName = "Nakul",
-					CustomerPhone = "8908903248",
-					JobId = "jbsdfsf2346",
-					ServiceType = "New"
-				},
-				new JobVM
-				{
-					CustomerName = "Sahdev",
-					CustomerPhone = "8908903249",
-					JobId = "jb342sefs",
-					ServiceType = "New"
-				}
-			};
-
-			return jobs;
-		}
 	}
 }

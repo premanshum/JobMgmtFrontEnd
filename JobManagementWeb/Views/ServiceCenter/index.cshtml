@@ -3,24 +3,21 @@
 <div>
     <div class="row">
         <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px">
-            <div class="card-header"><h1>Search Job</h1></div>
+            <div class="card-header"><h4>Search Job</h4></div>
             <div class="card-body">
                 <partial name="_SearchJob" model="Model.Search" />
             </div>
             <div id="searchResponse"></div>
         </div>
         <div class="card text-white bg-primary mb-4" style="max-width: 20rem; margin-right:10px" id="divCreateJob">
-            <div class="card-header"><h1>Create Job</h1></div>
+            <div class="card-header"><h4>Create Job</h4></div>
             <div class="card-body">
                 <partial name="_CreateJob" model="Model.Job" />
                 <div id="response"></div>
             </div>
         </div>
-        <div class="card text-white bg-primary mb-4" style="max-width: 20rem;" id="divJobDetails">
-            <div class="card-header"><h1>Job Details</h1></div>
-            <div class="card-body">
-                <partial name="_JobDetails" model="Model.Job" />
-            </div>
+        <div class="card text-white bg-primary mb-4" style="max-width: 30rem; margin-right:10px" id="divJobDetails">
+            <partial name="_JobDetails" model="Model.Job" />
         </div>
     </div>
 
