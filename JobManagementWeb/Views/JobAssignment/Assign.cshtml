@@ -1,0 +1,40 @@
+﻿@model JobManagementWeb.Infrastructure.Models.JobAssignmentVM
+
+@{
+    ViewData["Title"] = "Job Assignment";
+}
+
+<h1>Assign</h1>
+
+<h4>Job</h4>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Job.JobId" />
+            <div class="form-group">
+                <label asp-for="Job.CustomerName" class="control-label"></label> :
+                <span>@Model.Job.CustomerName</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.CustomerPhone" class="control-label"></label> :
+                <span>@Model.Job.CustomerPhone</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.ServiceType" class="control-label"></label> :
+                <span>@Model.Job.ServiceType</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineerId" class="control-label"></label> :
+                <select asp-for="Job.AssignedTo.EngineerId" asp-items="@(new SelectList(Model.Engineers, "EngineerId", "EngineerName"))"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

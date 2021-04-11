@@ -6,9 +6,9 @@ namespace JobManagementWeb.Infrastructure.Models
 {
 	public class EngineerVM
 	{
-		public string EnggId { get; set; }
+		public string EngineerId { get; set; }
 
-		public string Name { get; set; }
+		public string EngineerName { get; set; }
 
 		public string GroupId { get; set; }
 

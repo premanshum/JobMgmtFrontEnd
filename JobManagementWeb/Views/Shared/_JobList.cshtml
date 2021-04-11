@@ -1,6 +1,6 @@
 ﻿@model List<JobManagementWeb.Infrastructure.Models.JobVM>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>Jobs</th>
@@ -9,7 +9,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="">
                 <td>
                     @item.JobId
                 </td>
@@ -23,9 +23,7 @@
                     @item.ServiceType
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Assign", "Assign", new { id=item.JobId })
                 </td>
             </tr>
         }

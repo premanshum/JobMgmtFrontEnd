@@ -32,8 +32,8 @@ namespace JobManagementWeb.Controllers
 					AssignedOn = DateTime.Now.AddDays(-3),
 					AssignedTo = new EngineerVM
 						{
-							EnggId = "en1001",
-							Name = "Visarpi",
+							EngineerId = "en1001",
+							EngineerName = "Visarpi",
 						},
 					JobStatuses = new List<StatusVM>
 					{
@@ -68,8 +68,8 @@ namespace JobManagementWeb.Controllers
 					ServiceType = "Service",
 					AssignedTo = new EngineerVM
 						{
-							EnggId = "en1002",
-							Name = "Ketki",
+							EngineerId = "en1002",
+							EngineerName = "Ketki",
 						},
 					JobStatuses = new List<StatusVM>
 					{
@@ -97,8 +97,8 @@ namespace JobManagementWeb.Controllers
 					ServiceType = "Service",
 					AssignedTo = new EngineerVM
 						{
-							EnggId = "en1003",
-							Name = "Tuhin",
+							EngineerId = "en1003",
+							EngineerName = "Tuhin",
 						},
 					JobStatuses = new List<StatusVM>
 					{
@@ -119,8 +119,8 @@ namespace JobManagementWeb.Controllers
 					ServiceType = "New",
 					AssignedTo = new EngineerVM
 						{
-							EnggId = "en1004",
-							Name = "Nisha",
+							EngineerId = "en1004",
+							EngineerName = "Nisha",
 						},
 					JobStatuses = new List<StatusVM>
 					{
@@ -148,8 +148,8 @@ namespace JobManagementWeb.Controllers
 					ServiceType = "New",
 					AssignedTo = new EngineerVM
 						{
-							EnggId = "en1005",
-							Name = "Kasi",
+							EngineerId = "en1005",
+							EngineerName = "Kasi",
 						},
 					JobStatuses = new List<StatusVM>
 					{
@@ -180,5 +180,50 @@ namespace JobManagementWeb.Controllers
 
 			return jobs;
 		}
+
+		protected List<EngineerVM> GetEngineers()
+		{
+			List<EngineerVM> engineers = new List<EngineerVM>
+			{
+				new EngineerVM
+				{
+					EngineerId = "en1001",
+					EngineerName = "Visarpi",
+					GroupId = "grp001",
+					GroupName = "Venom"
+				},
+				new EngineerVM
+				{
+					EngineerId = "en1002",
+					EngineerName = "Ketki",
+					GroupId = "grp001",
+					GroupName = "Venom"
+				},
+				new EngineerVM
+				{
+					EngineerId = "en1003",
+					EngineerName = "Tuhin",
+					GroupId = "grp001",
+					GroupName = "Venom"
+				},
+				new EngineerVM
+				{
+					EngineerId = "en1004",
+					EngineerName = "Nisha",
+					GroupId = "grp001",
+					GroupName = "Venom"
+				},
+				new EngineerVM
+				{
+					EngineerId = "en1005",
+					EngineerName = "Kasi",
+					GroupId = "grp001",
+					GroupName = "Venom"
+				}
+			};
+
+			return engineers;
+		}
+	
 	}
 }

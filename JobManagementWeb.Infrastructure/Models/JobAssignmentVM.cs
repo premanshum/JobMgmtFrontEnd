@@ -12,6 +12,12 @@ namespace JobManagementWeb.Infrastructure.Models
 
 		public List<JobVM> Jobs { get; set; }
 
-		public List<EngineerVM> Engineers { get; set; }
+		public IEnumerable<EngineerVM> Engineers { get; set; }
+
+		public JobVM Job { get; set; }
+
+		public EngineerVM Engineer { get; set; }
+
+		public string EngineerId { get; set; }
 	}
 }
