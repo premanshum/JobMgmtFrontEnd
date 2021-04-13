@@ -46,7 +46,7 @@ namespace JobManagementWeb.Controllers
                 {
                     return RedirectToAction("Index", "Admin");
                 }
-                return RedirectToAction("Index", "JobAssignment");
+                return RedirectToAction("Index", "Dashboard");
             }
             return View(objUser);
         }

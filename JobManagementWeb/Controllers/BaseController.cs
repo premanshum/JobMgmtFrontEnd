@@ -20,7 +20,7 @@ namespace JobManagementWeb.Controllers
 
 		protected List<JobVM> GetJobs()
 		{
-			string dateTimeFormat = "dd MMM yy @ hh:mm tt";
+			string dateTimeFormat = "yyyy-MM-ddThh:mm:ssZ";
 			List<JobVM> jobs = new List<JobVM>
 			{
 				new JobVM
@@ -42,21 +42,21 @@ namespace JobManagementWeb.Controllers
 							StatusId = "st1001",
 							StatusName = "AcceptJob",
 							StatusDescription = "Accepted the job",
-							TimeStamp = DateTime.Now.AddDays(-3).AddHours(-4).ToString(dateTimeFormat)
-						},
-						new StatusVM
-						{
-							StatusId = "st1002",
-							StatusName = "Reaching Site",
-							StatusDescription = "Reaching Site",
-							TimeStamp = DateTime.Now.AddDays(-3).AddHours(-2).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-3).AddHours(-6).ToString(dateTimeFormat)
 						},
 						new StatusVM
 						{
 							StatusId = "st1002",
 							StatusName = "Completing Job",
 							StatusDescription = "Completing Job",
-							TimeStamp = DateTime.Now.AddDays(-3).AddHours(-1).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-3).AddHours(-4).ToString(dateTimeFormat)
+						},
+						new StatusVM
+						{
+							StatusId = "st1002",
+							StatusName = "Reaching Site",
+							StatusDescription = "Reaching Site",
+							CreatedOn = DateTime.Now.AddDays(-3).AddHours(-2).ToString(dateTimeFormat)
 						}
 					}
 				},
@@ -78,14 +78,14 @@ namespace JobManagementWeb.Controllers
 							StatusId = "st1001",
 							StatusName = "AcceptJob",
 							StatusDescription = "Accepted the job",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
 						},
 						new StatusVM
 						{
 							StatusId = "st1002",
 							StatusName = "Reaching Site",
 							StatusDescription = "Reaching Site",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
 						}
 					}
 				},
@@ -107,7 +107,7 @@ namespace JobManagementWeb.Controllers
 							StatusId = "st1001",
 							StatusName = "AcceptJob",
 							StatusDescription = "Accepted the job",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
 						}
 					}
 				},
@@ -129,14 +129,14 @@ namespace JobManagementWeb.Controllers
 							StatusId = "st1001",
 							StatusName = "AcceptJob",
 							StatusDescription = "Accepted the job",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
 						},
 						new StatusVM
 						{
 							StatusId = "st1002",
 							StatusName = "Reaching Site",
 							StatusDescription = "Reaching Site",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
 						}
 					}
 				},
@@ -155,24 +155,24 @@ namespace JobManagementWeb.Controllers
 					{
 						new StatusVM
 						{
-							StatusId = "st1001",
-							StatusName = "AcceptJob",
-							StatusDescription = "Accepted the job",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
-						},
-						new StatusVM
-						{
 							StatusId = "st1002",
 							StatusName = "Reaching Site",
 							StatusDescription = "Reaching Site",
-							TimeStamp = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-6).ToString(dateTimeFormat)
 						},
 						new StatusVM
 						{
-							StatusId = "st1002",
+							StatusId = "st1003",
 							StatusName = "Completing Job",
 							StatusDescription = "Completing Job",
-							TimeStamp = DateTime.Now.AddDays(-3).AddHours(-1).ToString(dateTimeFormat)
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-1).ToString(dateTimeFormat)
+						},
+						new StatusVM
+						{
+							StatusId = "st1001",
+							StatusName = "AcceptJob",
+							StatusDescription = "Accepted the job",
+							CreatedOn = DateTime.Now.AddDays(-2).AddHours(-9).ToString(dateTimeFormat)
 						}
 					}
 				}

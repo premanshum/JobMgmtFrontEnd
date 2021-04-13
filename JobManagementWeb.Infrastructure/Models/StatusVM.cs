@@ -1,10 +1,11 @@
-﻿using System;
+﻿using JobManagementWeb.Utility.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace JobManagementWeb.Infrastructure.Models
 {
-	public class StatusVM
+	public class StatusVM : BaseVM
 	{
 		public string StatusId { get; set; }
 
@@ -12,8 +13,12 @@ namespace JobManagementWeb.Infrastructure.Models
 
 		public string StatusDescription { get; set; }
 
-		public string CreatedOn { get; set; }
-
-		public string TimeStamp { get; set; }
+		public string TimeStamp 
+		{
+			get
+			{
+				return CreatedOn.TryParseDate();
+			}
+		}
 	}
 }

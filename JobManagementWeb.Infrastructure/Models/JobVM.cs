@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
+using Utility;
 
 namespace JobManagementWeb.Infrastructure.Models
 {
 	public class JobVM
 	{
+		List<StatusVM> _JobStatuses;
+
 		public string JobId { get; set; }
 
 		[Display(Name = "Customer Name")]
@@ -25,7 +29,26 @@ namespace JobManagementWeb.Infrastructure.Models
 
 		public DateTime AssignedOn { get; set; }
 
-		public List<StatusVM> JobStatuses { get; set; }
+		public List<StatusVM> JobStatuses {
+			get
+			{
+				return _JobStatuses;
+			}
+			set
+			{
+				_JobStatuses = value;
+				_JobStatuses.Sort((x, y) => {
+					return SortUtility.CompareByCreatedOn(x.CreatedOn, y.CreatedOn);
+				});
+			} 
+		}
 
+		public StatusVM CurrentStatus
+		{
+			get
+			{
+				return JobStatuses.First();
+			}
+		}
 	}
 }

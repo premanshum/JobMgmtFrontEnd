@@ -1,0 +1,31 @@
+﻿@model JobManagementWeb.Infrastructure.Models.DashboardVM
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Jobs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Jobs)
+        {
+        <tr class="">
+            <td>
+                @item.AssignedTo.EngineerName
+            </td>
+            <td>
+                @item.JobStatuses
+            </td>
+            <td>
+                @item.CustomerName
+            </td>
+            <td>
+                @item.CustomerPhone
+            </td>
+            <td>
+                @item.ServiceType
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
