@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace JobManagementWeb.Infrastructure.Models
 {
@@ -21,5 +19,9 @@ namespace JobManagementWeb.Infrastructure.Models
 		public EngineerVM Engineer { get; set; }
 
 		public string EngineerId { get; set; }
+
+		public List<GroupVM> Groups { get; set; }
+
+		public GroupVM Group { get; set; }
 	}
 }

@@ -1,0 +1,96 @@
+﻿@model JobManagementWeb.Infrastructure.Models.GroupVM
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "Group Edit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h2>Group - Details</h2>
+                <hr />
+            </div>
+            <div class="row">
+                <h4>@Model.GroupName (@Model.GroupDescription)</h4>
+            </div>
+            <div class="row">
+                <h5>Supervisor: @Model.Supervisor.EngineerName</h5>
+                <hr />
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div>
+                    <h5>Engineers</h5>
+                </div>
+                <hr />
+                <div>
+                    <h6><a href="#" id="ancAddEngineer">[+]</a></h6>
+                </div>
+            </div>
+            <hr />
+            <div class="card text-white bg-primary mb-3" style="max-width: 100%;" id="divAddEngineer">
+                <div class="card-header">Add Engineer</div>
+                <div class="card-body">
+                    <h4 class="card-title">Select Engineer</h4>
+                    <select id="selectEngineer" name="selectEngineer" class="form-control" style="max-width: 100%;"></select>
+                    <button type="submit" id="btnEngineerSave" class="btn btn-primary" style="margin:10px 0 0 0">Save</button>
+                </div>
+            </div>
+            <div id="divEngineerList">
+                <partial name="_EngineerList" model="Model.Engineers" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+
+    var isAddEngineerVisible = false;
+
+    $(document).ready(function () {
+        $("#divAddEngineer").css("display", "none");
+        $('#ancAddEngineer').click(OnAddEngineerClick);
+        $('#btnEngineerSave').click(OnAddEngineerSaveClick);
+    });
+
+    var OnAddEngineerClick = () => {
+        $("#divAddEngineer").css("display", "none");
+        isAddEngineerVisible = !isAddEngineerVisible;
+        if (isAddEngineerVisible) {
+            $("#divAddEngineer").css("display", "block");
+            $.ajax({
+                url: "/group/GetFreePoolEngineers",
+                method: "get",
+                success: function (data) {
+                    $('#selectEngineer').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#selectEngineer').append('<option value="' + data[i].engineerId + '">' + data[i].engineerName + '</option>');
+                    }
+                }
+            });
+        }
+    };
+
+    var OnAddEngineerSaveClick = () => {
+        var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+        console.log("$('#selectEngineer'):", $('#selectEngineer'));
+        var selectEngineer = document.getElementById("selectEngineer");
+        var selectedEngineerId = selectEngineer.value;
+        $.ajax({
+            url: "/group/AddEngineer?groupId=" + model.GroupId + "&engineerId=" + selectedEngineerId,
+            method: "get",
+            success: function (data) {
+            }
+        });
+        isAddEngineerVisible = !isAddEngineerVisible;
+        $("#divAddEngineer").css("display", "none");
+
+        $("#divEngineerList").load('@Url.Action("GetGroupEngineers", "Group")' + '?groupId=' + model.GroupId);
+    };
+</script>

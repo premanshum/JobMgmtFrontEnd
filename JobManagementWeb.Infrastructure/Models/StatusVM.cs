@@ -17,7 +17,7 @@ namespace JobManagementWeb.Infrastructure.Models
 		{
 			get
 			{
-				return CreatedOn.TryParseDate();
+				return CreatedOn.TryParseDate("dd MMM \\`yy \"at\" hh:mm tt");
 			}
 		}
 	}

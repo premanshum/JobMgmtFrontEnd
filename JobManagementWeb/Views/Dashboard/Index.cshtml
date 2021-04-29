@@ -1,31 +1,14 @@
 ﻿@model JobManagementWeb.Infrastructure.Models.DashboardVM
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Jobs</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Jobs)
-        {
-        <tr class="">
-            <td>
-                @item.AssignedTo.EngineerName
-            </td>
-            <td>
-                @item.CurrentStatus.StatusName
-            </td>
-            <td>
-                @item.CustomerName
-            </td>
-            <td>
-                @item.CustomerPhone
-            </td>
-            <td>
-                @item.ServiceType
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+    
+
+
+    <label asp-for="Groups" class="control-label"></label> :
+    <select asp-for="Group.GroupId"
+            asp-items="@(new SelectList(Model.Groups, "GroupId", "GroupName"))">
+    </select>
+
+
+
+<partial name="_EngineerJobList" model="Model" />
+

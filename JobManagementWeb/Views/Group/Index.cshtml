@@ -1,0 +1,36 @@
+﻿@model JobManagementWeb.Infrastructure.Models.GroupMainVM
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Supervisor</th>
+            <th scope="col">Engineer Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Groups)
+        {
+            <tr class="">
+                <td>
+                    @item.GroupName
+                </td>
+                <td>
+                    @item.GroupDescription
+                </td>
+                <td>
+                    @item.Supervisor.EngineerName
+                </td>
+                <td>
+                    @item.Engineers.Count
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -10,7 +10,7 @@ namespace JobManagementWeb.Utility.Extensions
         /// </summary>
         /// <param name="strDate"></param>
         /// <returns></returns>
-        public static string TryParseDate(this string strDate)
+        public static string TryParseDate(this string strDate, string dateTimeFormat = "")
         {
             //https://stackoverflow.com/questions/3556144/how-to-create-a-net-datetime-from-iso-8601-format
             string[] formats = { 
@@ -51,6 +51,7 @@ namespace JobManagementWeb.Utility.Extensions
                 "dd MMM, YYYY",
                 "MM/dd/yyyy HH:mm:ss"
                 };
+            var formattedDateTime = "";
 
             if (string.IsNullOrWhiteSpace(strDate))
             {
@@ -60,13 +61,23 @@ namespace JobManagementWeb.Utility.Extensions
             {
                 try
                 {
-                    return DateTime.ParseExact(strDate, formats, CultureInfo.InvariantCulture, DateTimeStyles.None)
-                        .ToString(ConfigValues.DateTimeFormatConfig);
+                    if (string.IsNullOrEmpty(dateTimeFormat))
+                    {
+                        formattedDateTime = DateTime.ParseExact(strDate, formats, CultureInfo.InvariantCulture, DateTimeStyles.None)
+                            .ToString(ConfigValues.DateTimeFormatConfig);
+                    }
+                    else
+                    {
+                        formattedDateTime =  DateTime.ParseExact(strDate, formats, CultureInfo.InvariantCulture, DateTimeStyles.None)
+                            .ToString(dateTimeFormat);
+                    }
                 }
                 catch (Exception ex)
                 {
                     return string.Empty;
                 }
+
+                return formattedDateTime;
             }
         }
 

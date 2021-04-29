@@ -47,6 +47,10 @@ namespace JobManagementWeb.Infrastructure.Models
 		{
 			get
 			{
+				if (JobStatuses == null || !JobStatuses.Any())
+				{
+					return null;
+				}
 				return JobStatuses.First();
 			}
 		}

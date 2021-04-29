@@ -1,0 +1,11 @@
+﻿@model List<JobManagementWeb.Infrastructure.Models.EngineerVM>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        @item.EngineerName
+        <span class="badge badge-primary badge-pill">@Html.ActionLink("Remove", "RemoveEngineer", new { id = item.EngineerId })</span>
+    </li>
+    }
+</ul>

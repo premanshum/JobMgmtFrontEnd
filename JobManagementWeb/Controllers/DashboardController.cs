@@ -1,5 +1,6 @@
 ﻿using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace JobManagementWeb.Controllers
 {
@@ -10,6 +11,8 @@ namespace JobManagementWeb.Controllers
         {
             _DashboardVM = new DashboardVM();
             _DashboardVM.Jobs = GetJobs();
+            _DashboardVM.Groups = GetGroups();
+            _DashboardVM.Group = _DashboardVM.Groups.First();
             return View(_DashboardVM);
         }
     }

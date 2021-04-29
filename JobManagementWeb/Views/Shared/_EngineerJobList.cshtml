@@ -14,7 +14,7 @@
                 @item.AssignedTo.EngineerName
             </td>
             <td>
-                @item.JobStatuses
+                @item.CurrentStatus.StatusName
             </td>
             <td>
                 @item.CustomerName
@@ -24,6 +24,9 @@
             </td>
             <td>
                 @item.ServiceType
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "JobDetails", new { id = item.JobId })
             </td>
         </tr>
         }
