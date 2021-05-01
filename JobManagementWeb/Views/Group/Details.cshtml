@@ -86,11 +86,11 @@
             url: "/group/AddEngineer?groupId=" + model.GroupId + "&engineerId=" + selectedEngineerId,
             method: "get",
             success: function (data) {
+                $("#divEngineerList").load('@Url.Action("GetGroupEngineers", "Group")' + '?groupId=' + model.GroupId);
             }
         });
         isAddEngineerVisible = !isAddEngineerVisible;
         $("#divAddEngineer").css("display", "none");
 
-        $("#divEngineerList").load('@Url.Action("GetGroupEngineers", "Group")' + '?groupId=' + model.GroupId);
     };
 </script>

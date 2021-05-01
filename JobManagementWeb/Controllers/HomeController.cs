@@ -3,6 +3,9 @@ using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
 
 namespace JobManagementWeb.Controllers
 {
@@ -37,10 +40,20 @@ namespace JobManagementWeb.Controllers
         public IActionResult Index(UserProfile objUser)
         {
             var modelData = objUser != null ? "true" : "false";
+            var loginURL = "http://localhost:55000/api/authenticate/login";
             if (ModelState.IsValid)
             {
-                HttpContext.Session.Clear();
-                _sessionValues.UserId = objUser.UserName.ToString();
+                using (HttpClient client = new HttpClient())
+                {
+                    var loginModel = new { Username = "jobadmin1", Password = "Welcome@123" };
+                    var encodedContent = new StringContent(JsonConvert.SerializeObject(loginModel), UnicodeEncoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync(loginURL, encodedContent).Result;
+                    string responseBody = response.Content.ReadAsStringAsync().Result;
+                }
+
+                    //HttpContext.Session.Clear();
+                    //_sessionValues.UserId = objUser.UserName.ToString();
+                    HttpContext.Session.SetString("UserId", objUser.UserName);
                 if (objUser.UserName.ToLower().Equals("ad"))
                 {
                     return RedirectToAction("Index", "Admin");

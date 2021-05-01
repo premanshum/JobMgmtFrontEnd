@@ -3,19 +3,39 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using JobManagementWeb.Infrastructure.Interfaces.Services;
 using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace JobManagementWeb.Controllers
 {
     public abstract class BaseController : Controller
-    {
+	{
+		private readonly ILogger _logger;
 
-        [ActionName("SignOut")]
+		public BaseController()
+		{
+		}
+
+		public BaseController(
+			ISessionValues sessionValues,
+			ILogger logger)
+		{
+			SessionValues = sessionValues;
+			_logger = logger;
+		}
+
+		public ISessionValues SessionValues { get; private set; }
+
+
+		[ActionName("SignOut")]
         public IActionResult SignOut()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+			HttpContext.Response.Cookies.Delete(HttpContext.Session.Id);
+
+			return RedirectToAction("Index", "Home");
         }
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -13,21 +13,16 @@ namespace JobManagementWeb.Controllers
 
 	public class ServiceCenterController : BaseController
 	{
-		private readonly ILogger<HomeController> _logger;
-		private readonly ISessionValues _sessionValues;
 		JobVM _jobVM;
 		ServiceCenterVM _serviceCenterVM;
 
 		public ServiceCenterController(
-			ILogger<HomeController> logger,
-			ISessionValues sessionValues)
+			ISessionValues sessionValues,
+			ILogger<ServiceCenterController> logger) : base(sessionValues, logger)
 		{
-			_logger = logger;
-			_sessionValues = sessionValues;
-
 		}
 
-		
+
 		public IActionResult Index()
         {
 			_serviceCenterVM = new ServiceCenterVM();

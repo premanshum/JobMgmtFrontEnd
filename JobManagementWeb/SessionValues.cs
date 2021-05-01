@@ -1,6 +1,5 @@
 ﻿using JobManagementWeb.Infrastructure.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
-using System;
 
 namespace JobManagementWeb
 {
@@ -24,7 +23,22 @@ namespace JobManagementWeb
             }
             set
             {
-                _contextAccessor.HttpContext.Session.SetString("UserId", "The Doctor");
+                _contextAccessor.HttpContext.Session.SetString("UserId", value);
+            }
+        }
+
+        /// <summary>
+        /// UserId
+        /// </summary>
+        public string Token
+        {
+            get
+            {
+                return _contextAccessor.HttpContext.Session.GetString("Token");
+            }
+            set
+            {
+                _contextAccessor.HttpContext.Session.SetString("Token", value);
             }
         }
 

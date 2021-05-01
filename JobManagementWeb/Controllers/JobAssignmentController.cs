@@ -1,5 +1,7 @@
-﻿using JobManagementWeb.Infrastructure.Models;
+﻿using JobManagementWeb.Infrastructure.Interfaces.Services;
+using JobManagementWeb.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 
 namespace JobManagementWeb.Controllers
@@ -7,6 +9,13 @@ namespace JobManagementWeb.Controllers
     public class JobAssignmentController : BaseController
     {
         JobAssignmentVM _JobAssignmentVM;
+
+        public JobAssignmentController(
+            ISessionValues sessionValues,
+            ILogger<JobAssignmentController> logger) : base(sessionValues, logger)
+        {
+        }
+
         public IActionResult Index()
         {
             _JobAssignmentVM = new JobAssignmentVM();
