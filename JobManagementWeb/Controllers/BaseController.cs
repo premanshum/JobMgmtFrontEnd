@@ -24,6 +24,7 @@ namespace JobManagementWeb.Controllers
 		{
 			SessionValues = sessionValues;
 			_logger = logger;
+			ViewData["User"] = SessionValues.UserId;
 		}
 
 		public ISessionValues SessionValues { get; private set; }

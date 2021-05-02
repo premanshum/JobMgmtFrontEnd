@@ -18,6 +18,7 @@ namespace JobManagementWeb.Controllers
 
         public IActionResult Index()
         {
+            ViewData["User"] = SessionValues.UserId;
             _JobAssignmentVM = new JobAssignmentVM();
             _JobAssignmentVM.Jobs = GetJobs();
             return View(_JobAssignmentVM);

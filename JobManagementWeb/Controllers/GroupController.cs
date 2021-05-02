@@ -22,6 +22,7 @@ namespace JobManagementWeb.Controllers
 
         public IActionResult Index()
         {
+            ViewData["User"] = SessionValues.UserId;
             //HttpContext.Session.LoadAsync();
             var name = HttpContext.Session.GetString("UserId");
             _GroupMainVM = new GroupMainVM();
@@ -31,8 +32,8 @@ namespace JobManagementWeb.Controllers
 
         public IActionResult Edit(string id)
         {
-            var name = HttpContext.Session.GetString("UserId");
             _GroupVM = GetGroups().First(p => p.GroupId == id);
+            _GroupVM.UserName = SessionValues.UserId;
 
             return View(_GroupVM);
         }
@@ -46,6 +47,7 @@ namespace JobManagementWeb.Controllers
             {
                 return RedirectToAction(nameof(Error));
             }
+            _GroupVM.UserName = SessionValues.UserId;
 
             return View(_GroupVM);
         }
@@ -54,14 +56,15 @@ namespace JobManagementWeb.Controllers
         public IActionResult AddEngineer(string groupId, string engineerId)
         {
             var name = HttpContext.Session.GetString("UserId");
-            _GroupVM = GetGroups().FirstOrDefault(p => p.GroupId == "");
+            _GroupVM = GetGroups().FirstOrDefault(p => p.GroupId == groupId);
 
             if(_GroupVM == null)
             {
                 return RedirectToAction(nameof(Error));
             }
+            _GroupVM.UserName = SessionValues.UserId;
 
-            return View(_GroupVM);
+            return Ok();
         }
 
         [HttpPost]

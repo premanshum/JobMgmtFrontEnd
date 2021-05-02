@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JobManagementWeb</title>
+    <title>JobManagementWeb - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -29,7 +29,10 @@
                 </div>
             </div>
             <form class="form-inline my-2 my-lg-0" asp-action="SignOut">
-                <button class="btn btn-primary btn-sm my-2" type="submit">Sign out</button>
+                <div class="container">
+                    <h6>@ViewData["User"]</h6>
+                    <button class="btn btn-primary btn-sm my-2" type="submit">Sign out</button>
+                </div>
             </form>
         </nav>
     </header>

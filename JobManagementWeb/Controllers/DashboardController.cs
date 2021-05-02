@@ -19,6 +19,7 @@ namespace JobManagementWeb.Controllers
 
         public IActionResult Index()
         {
+            ViewData["User"] = SessionValues.UserId;
             var name = HttpContext.Session.GetString("UserId");
             _DashboardVM = new DashboardVM();
             _DashboardVM.Jobs = GetJobs();

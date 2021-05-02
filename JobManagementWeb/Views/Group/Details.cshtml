@@ -2,6 +2,7 @@
 @using Newtonsoft.Json
 @{
     ViewData["Title"] = "Group Edit";
+    ViewData["User"] = Model.UserName;
 }
 
 <div class="container">
@@ -86,6 +87,7 @@
             url: "/group/AddEngineer?groupId=" + model.GroupId + "&engineerId=" + selectedEngineerId,
             method: "get",
             success: function (data) {
+                alert(data);
                 $("#divEngineerList").load('@Url.Action("GetGroupEngineers", "Group")' + '?groupId=' + model.GroupId);
             }
         });
