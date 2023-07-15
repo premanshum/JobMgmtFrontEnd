@@ -1,6 +1,6 @@
 # JobManagementWeb
 
-##Web interface for Job management project
+## Web interface for Job management project
 
 Business flow:
 
